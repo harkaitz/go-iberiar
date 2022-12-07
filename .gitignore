@@ -1,0 +1,7 @@
+go-iberiar.tar.gz
+## -- GO --
+bin/iberiar-web
+bin/iberiar-web.*
+bin/iberiar
+bin/iberiar.*
+## -- GO --
