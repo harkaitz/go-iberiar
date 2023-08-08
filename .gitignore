@@ -5,3 +5,9 @@ bin/iberiar-web.*
 bin/iberiar
 bin/iberiar.*
 ## -- GO --
+## -- BLOCK:license --
+## -- BLOCK:license --
+## -- BLOCK:go --
+build/*
+releases/*
+## -- BLOCK:go --

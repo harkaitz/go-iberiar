@@ -1,52 +1,54 @@
-DESTDIR  =
-PREFIX   =/usr/local
-ETCDIR   =/etc
-BINDHTTP =0.0.0.0:8083
+PROJECT   =go-iberiar
+VERSION   =1.0.0
+DESTDIR   =
+PREFIX    =/usr/local
+ETCDIR    =/etc
+BINDHTTP  =127.0.0.1:8084
+PLATFORMS =linux-arm64
+SERVICES  =rpi3b:s=iberiar:p=linux-arm64
+HBINDINGS =iberiar.eu:i=127.0.0.1:p=8084
+HSERVICE  =rpi3b:s=https:i=192.168.1.6
 
-define SERVICE_SED
-s|@PREFIX@|$(PREFIX)|
-s|@EXE@|$(EXE)|
-s|@BINDHTTP@|$(BINDHTTP)|
-endef
-export SERVICE_SED
 all:
 clean:
 install:
 update:
-
-## Images
+## -- SERVICES --
+install-services:
+	@lsetup-runit   -v -D "$(DESTDIR)" -a "iberiar" "$(PREFIX)/bin/iberiar-web" "$(BINDHTTP)"
+	@lsetup-systemd -v -D "$(DESTDIR)" -a "iberiar" "$(PREFIX)/bin/iberiar-web" "$(BINDHTTP)"
+## -- SERVICES --
+## -- IMAGES --
 deps: cmd/iberiar-web/img/favicon.ico
 cmd/iberiar-web/img/favicon.ico: logo.png
-	@echo "B favicon.ico ..."
-	@favigen $< $@
-## -- AUTO-GO --
-GO_PROGRAMS += bin/iberiar-web$(EXE) bin/iberiar$(EXE) 
-.PHONY all-go: $(GO_PROGRAMS)
-all:     all-go
+	favigen $< $@
+## -- IMAGES --
+## -- BLOCK:license --
+install: install-license
+install-license: 
+	mkdir -p $(DESTDIR)$(PREFIX)/share/doc/$(PROJECT)
+	cp LICENSE README.md $(DESTDIR)$(PREFIX)/share/doc/$(PROJECT)
+update: update-license
+update-license:
+	ssnip README.md
+## -- BLOCK:license --
+## -- BLOCK:go --
+all: all-go
 install: install-go
-clean:   clean-go
-deps:
-bin/iberiar-web$(EXE): deps 
-	go build -o $@ $(IBERIAR_WEB_FLAGS) $(GO_CONF) ./cmd/iberiar-web
-bin/iberiar$(EXE): deps 
-	go build -o $@ $(IBERIAR_FLAGS) $(GO_CONF) ./cmd/iberiar
+clean: clean-go
+deps: deps-go
+
+build/iberiar-web$(EXE): deps
+	go build -o $@ $(GO_CONF) ./cmd/iberiar-web
+build/iberiar$(EXE): deps
+	go build -o $@ $(GO_CONF) ./cmd/iberiar
+
+all-go:  build/iberiar-web$(EXE) build/iberiar$(EXE)
+deps-go:
+	mkdir -p build
 install-go:
 	install -d $(DESTDIR)$(PREFIX)/bin
-	cp bin/iberiar-web$(EXE) $(DESTDIR)$(PREFIX)/bin
-	cp bin/iberiar$(EXE) $(DESTDIR)$(PREFIX)/bin
+	cp  build/iberiar-web$(EXE) build/iberiar$(EXE) $(DESTDIR)$(PREFIX)/bin
 clean-go:
-	rm -f $(GO_PROGRAMS)
-## -- AUTO-GO --
-## -- license --
-install: install-license
-install-license: LICENSE
-	mkdir -p $(DESTDIR)$(PREFIX)/share/doc/go-iberiar
-	cp LICENSE $(DESTDIR)$(PREFIX)/share/doc/go-iberiar
-## -- license --
-## -- AUTO-SERVICE --
-install: install-services
-install-services:
-	mkdir -p $(DESTDIR)$(ETCDIR)/sv/iberiar
-	sed "$${SERVICE_SED}" './iberiar.sv.sh' > $(DESTDIR)$(ETCDIR)/sv/iberiar/run
-	chmod +x $(DESTDIR)$(ETCDIR)/sv/iberiar/run
-## -- AUTO-SERVICE --
+	rm -f  build/iberiar-web$(EXE) build/iberiar$(EXE)
+## -- BLOCK:go --
