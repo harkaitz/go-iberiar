@@ -1,4 +1,8 @@
 go-iberiar.tar.gz
+*.min.js
+*.js.map
+*.min.css
+*.css.map
 ## -- GO --
 bin/iberiar-web
 bin/iberiar-web.*
