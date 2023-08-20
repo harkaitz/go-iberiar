@@ -1,5 +1,5 @@
 PROJECT   =go-iberiar
-VERSION   =1.0.0
+VERSION   =1.0.1
 DESTDIR   =
 PREFIX    =/usr/local
 ETCDIR    =/etc
@@ -13,16 +13,33 @@ all:
 clean:
 install:
 update:
-## -- SERVICES --
+
 install-services:
-	@lsetup-runit   -v -D "$(DESTDIR)" -a "iberiar" "$(PREFIX)/bin/iberiar-web" "$(BINDHTTP)"
-	@lsetup-systemd -v -D "$(DESTDIR)" -a "iberiar" "$(PREFIX)/bin/iberiar-web" "$(BINDHTTP)"
-## -- SERVICES --
-## -- IMAGES --
-deps: cmd/iberiar-web/img/favicon.ico
-cmd/iberiar-web/img/favicon.ico: logo.png
+	@lsetup-runit   -v -D "$(DESTDIR)" -a "iberiar" "$(PREFIX)/bin/iberiar" "$(BINDHTTP)"
+	@lsetup-systemd -v -D "$(DESTDIR)" -a "iberiar" "$(PREFIX)/bin/iberiar" "$(BINDHTTP)"
+
+deps: cmd/iberiar/img/favicon.ico
+cmd/iberiar/img/favicon.ico: logo.png
 	favigen $< $@
-## -- IMAGES --
+
+## -- BLOCK:go --
+all: all-go
+install: install-go
+clean: clean-go
+deps: deps-go
+
+build/iberiar$(EXE): deps
+	go build -o $@ $(GO_CONF) ./cmd/iberiar
+
+all-go:  build/iberiar$(EXE)
+deps-go:
+	mkdir -p build
+install-go:
+	install -d $(DESTDIR)$(PREFIX)/bin
+	cp  build/iberiar$(EXE) $(DESTDIR)$(PREFIX)/bin
+clean-go:
+	rm -f  build/iberiar$(EXE)
+## -- BLOCK:go --
 ## -- BLOCK:license --
 install: install-license
 install-license: 
@@ -32,23 +49,3 @@ update: update-license
 update-license:
 	ssnip README.md
 ## -- BLOCK:license --
-## -- BLOCK:go --
-all: all-go
-install: install-go
-clean: clean-go
-deps: deps-go
-
-build/iberiar-web$(EXE): deps
-	go build -o $@ $(GO_CONF) ./cmd/iberiar-web
-build/iberiar$(EXE): deps
-	go build -o $@ $(GO_CONF) ./cmd/iberiar
-
-all-go:  build/iberiar-web$(EXE) build/iberiar$(EXE)
-deps-go:
-	mkdir -p build
-install-go:
-	install -d $(DESTDIR)$(PREFIX)/bin
-	cp  build/iberiar-web$(EXE) build/iberiar$(EXE) $(DESTDIR)$(PREFIX)/bin
-clean-go:
-	rm -f  build/iberiar-web$(EXE) build/iberiar$(EXE)
-## -- BLOCK:go --

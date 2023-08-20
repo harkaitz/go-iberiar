@@ -1,88 +1,112 @@
 package main
+
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/harkaitz/go-iberiar"
-	"github.com/pborman/getopt/v2"
+	"net/http"
+	"html/template"
+	"io/fs"
 	"log"
+	"bytes"
+	"embed"
 	"os"
-	"fmt"
-	"bufio"
 )
-
-const help string =
-`Usage: iberiar OPTS... TXT...
-
-Convert texts in basque to iberian script.
-
-    -h           : Print this help.
-    -s SILLABARY : Choose sillabary.
-    -t TEMPLATE  : Choose SVG template to use.
-    -l           : Print latin code.
-    -S           : Print SVG.
-
-Sillabaries:
-
-    ne-nd : North East Non Dual.
-    ne    : North East dual.
-
-Templates:
-
-    empty : Empty template.
-`
-const copyrightLine string =
-`Bug reports, feature requests to gemini|https://harkadev.com/oss
-Copyright (c) 2022 Harkaitz Agirre, harkaitz.aguirre@gmail.com`
 
 
 func main() {
-
-	hFlag := getopt.Bool('h')
-	sFlag := getopt.String('s', "")
-	tFlag := getopt.String('t', "")
-	SFlag := getopt.Bool('S');
-	lFlag := getopt.Bool('l');
-
-	/* Parse command line arguments. */
-	getopt.SetUsage(func() { fmt.Println(help + "\n\n" + copyrightLine) })
-	getopt.Parse()
-	if *hFlag {
-		getopt.Usage()
-		return
-	}
-
-	/* Get sillabary */
-	runes, err := iberiar.GetSillabary(*sFlag)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	/* Read input. */
-	scanner := bufio.NewScanner(os.Stdin)
-	text    := ""
-	for scanner.Scan() {
-		text = text + scanner.Text() + "\n"
-	}
-
-	/* Translate. */
-	iberian, latin, err := iberiar.ToIberian(text, runes)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	/* Print text. */
-	if *SFlag {
-		ins := iberiar.CreateInscription(iberian)
-		if err != nil {
-			log.Fatal(err)
-		}
-		err = iberiar.PrintInscription(ins, os.Stdout, *tFlag)
-		if err != nil {
-			log.Fatal(err)
-		}
-	} else if *lFlag {
-		fmt.Println(latin)
-	} else {
-		fmt.Println(iberian)
-	}
+	r := gin.Default()
+	cssFS, _ := fs.Sub(staticFS,"css")
+	jsFS, _  := fs.Sub(staticFS,"js")
+	imgFS, _ := fs.Sub(staticFS,"img")
+	assFS, _ := fs.Sub(staticFS,"assets")
+	r.StaticFS("/css"   , http.FS(cssFS))
+	r.StaticFS("/js"    , http.FS(jsFS))
+	r.StaticFS("/img"   , http.FS(imgFS))
+	r.StaticFS("/assets", http.FS(assFS))
 	
+	r.GET("/", IndexPage)
+	r.GET("/IberianText", IberianText)
+	r.GET("/LatinText"  , LatinText)
+	r.GET("/IberianSVG" , IberianSVG)
+	if len(os.Args) >= 2 {
+		r.Run(os.Args[1])
+	} else {
+		r.Run()
+	}
 }
 
+func IndexPage(ctx *gin.Context) {
+	var web   struct {}
+	var html *template.Template
+	
+	html, _ = template.New("").Parse(htmlIndexS)
+	ctx.Writer.WriteHeader(http.StatusOK)
+	html.Execute(ctx.Writer, &web)
+}
+
+func IberianText(ctx *gin.Context) {
+	var iberian  string
+	var err      error
+	
+	iberian, _, err = iberiar.ToIberian(
+		ctx.Query("text"),
+		iberiar.SillabaryNorthEastNonDual,
+	)
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	
+	ctx.Writer.WriteHeader(http.StatusOK)
+	ctx.Writer.WriteString(iberian)
+}
+
+func LatinText(ctx *gin.Context) {
+	var latin    string
+	var err      error
+	
+	_, latin, err = iberiar.ToIberian(
+		ctx.Query("text"),
+		iberiar.SillabaryNorthEastNonDual,
+	)
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	
+	ctx.Writer.WriteHeader(http.StatusOK)
+	ctx.Writer.WriteString(latin)
+}
+
+func IberianSVG(ctx *gin.Context) {
+	var b        bytes.Buffer
+	var iberian  string
+	var ins      iberiar.Inscription
+	var err      error
+	
+	iberian, _, err = iberiar.ToIberian(
+		ctx.Query("text"),
+		iberiar.SillabaryNorthEastNonDual,
+	)
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	
+	ins = iberiar.CreateInscription(iberian)
+	err = iberiar.PrintInscription(ins, &b, "")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	
+	ctx.Writer.WriteHeader(http.StatusOK)
+	ctx.Writer.Write(b.Bytes())
+	return
+}
+
+//go:embed index.html
+var htmlIndexS  string
+
+//go:embed js css img assets
+var staticFS embed.FS

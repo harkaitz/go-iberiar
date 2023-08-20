@@ -1,0 +1,24 @@
+#!/bin/sh -e
+##:
+#h: Usage: lsetup-iberian-keyboard -i
+##:
+#help: Install iberian keyboard.
+##:
+. getsrc-vault
+. getsrc-cached
+lsetup_iberian_keyboard() {
+    local u t f
+    u="https://ibers.cat/uniedit-iberian.tcl"
+    t="/usr/local/bin/iberian-keyboard"
+    if test -e "${t}"; then return 0; fi
+    f="$(getsrc_vault -n uniedit-iberian.tcl getsrc_cached "${u}")"
+    test -n "${f}"
+    sudo cp -v "${f}" "${t}"
+    sudo chmod -v +x "${t}"
+}
+if test @"$(basename "$0")" = @"lsetup-iberian-keyboard";then
+    case "${1}" in
+        ''|-h|--help) sed -n 's/^ *#h: \{0,1\}//p' "$0"    ;;
+        -*i*)         lsetup_iberian_keyboard "$@"; exit 0 ;;
+    esac
+fi

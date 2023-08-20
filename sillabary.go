@@ -1,7 +1,6 @@
 package iberiar
 
 import (
-	"fmt"
 	"regexp"
 	"strings"
 )
@@ -12,20 +11,6 @@ type Rune struct {
 	ToLatin   string
 	ToIberian string
 }
-
-// GetSillabary returns a sillabary from a name.
-func GetSillabary(name string) (runes []Rune, err error) {
-	if name == "ne-nd" || name == "" {
-		runes = SillabaryNorthEastNonDual
-	} else if name == "ne" {
-		runes = SillabaryNorthEastDual
-	} else {
-		err = fmt.Errorf("Invalid sillabary: Available: ne-nd, ne")
-	}
-	return
-}
-
-
 
 // SillabaryNorthEastNonDual .
 var SillabaryNorthEastNonDual []Rune = []Rune {
@@ -55,6 +40,7 @@ var SillabaryNorthEastNonDual []Rune = []Rune {
 	{"[dt]u" ,"(D/T)U", ""},
 	{"t?z"   ,"Z"     , ""},
 	{"s"     ,"S"     , ""},
+	{"x"     ,"S"     , ""},
 	{"rr"    ,"RR"    , ""},
 	{"r"     ,"R"     , ""},
 	{"l"     ,"L"     , ""},
@@ -103,6 +89,7 @@ var SillabaryNorthEastDual []Rune = []Rune {
 	{"tu"    ,"TU" , ""},
 	{"t?z"   ,"Z"  , ""},
 	{"s"     ,"S"  , ""},
+	{"x"     ,"S"  , ""},
 	{"rr"    ,"RR" , ""},
 	{"r"     ,"R"  , ""},
 	{"l"     ,"L"  , ""},

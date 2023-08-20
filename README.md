@@ -6,7 +6,7 @@ visit it on https://iberiar.eu
 ## Development
 
 - Before editting the text, install the iberian font
-  from [here](./cmd/iberiar-web/iberian.ttf).
+  from [here](./cmd/iberiar/assets/iberian.ttf).
 - You need to setup a Go programming environment.
 
 ## Testing
@@ -14,7 +14,7 @@ visit it on https://iberiar.eu
 Simply run this commands:
 
     > make
-    > ./bin/iberiar-web
+    > ./bin/iberiar
     > firefox http://127.0.0.1:8080
 
 ## Todo

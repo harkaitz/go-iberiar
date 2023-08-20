@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iberiar.eu</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="htmx-config" content='{"htmx.config.globalViewTransitions":true}'>
+    <style>
+      @font-face {
+          font-family: 'iberian';
+          src: URL('/assets/iberian.ttf') format('truetype');
+      }
+      .iberian {
+          font-family: iberian;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Title -->
+    <div class="jumbotron text-center bg-light mt-0 mb-0">
+      <h1 class="pt-2" style="font-size: 36px">
+        Iberiar.eu
+        -
+        <span class="iberian" style="font-size: 24px"></span>
+      </h1>
+      Antzinako euskal/iberiar idazkera itzultzailea
+    </div>
+    <!-- Navigation bar -->
+    
+    <!-- Start the page -->
+    <div class="container-fluid mt-3 mb-5"
+         style="max-width: 800px">
+
+      <div class="card mt-1 mb-1">
+        <div class="card-body">
+          <h4 class="card-title">
+            <strong>Iberiar idazketa</strong> edo
+            <strong>iberiar idazkera</strong>
+          </h4>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <a href="https://eu.wikipedia.org/wiki/Iberiar_idazketa">
+              Wikipedia artikulutik
+            </a>
+          </h6>
+          <p class="card-text text-left">
+            Iberiar Penintsulan eta Frantzian aurkitu diren testuenak
+            dira. Iberiar herriek idazketa sistema desberdinak erabili
+            zituzten. Idazkera paleohispaniarretako bat da. 
+          </p>
+        </div>
+      </div>
+      
+      <div class="card mt-1 mb-1">
+        <div class="card-body">
+          <h4 class="card-title">Idatzi iberiarrez</h4>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Iberiar idazkera erdi silabiko erdi alfabetikoa zen. Euskara
+            nahiko ondo idatz daiteke. Beste hizkuntzak ia ezinezkoak
+            dira iberiarrez idaztea.
+          </h6>
+          <div class="row mb-1">
+            <div class="col">
+              <textarea id="BasqueText"
+                        class="form-control"
+                        name="text"
+                        rows="4"
+                        style="width: 100%; resize: none; background-color: #fff8dc"
+                        placeholder="Idatzi emen"
+                        js-autofill="true"
+                        >Zorionak, eta&#10;urte berri on.</textarea>
+              <center>
+                (Idatzi dezakezu)
+              </center>
+            </div>
+            <div class="col">
+              <textarea id="IberianText"
+                        class="form-control iberian"
+                        rows="5"
+                        readonly
+                        style="width:100%; resize: none; background-color: #eee8aa"
+                        hx-get="/IberianText"
+                        hx-trigger="keyup from:#BasqueText, load"
+                        hx-swap="innerHTML"
+                        hx-include="[name='text']"
+                        ></textarea>
+            </div>
+            <div class="col">
+              <textarea id="LatinText"
+                        class="form-control"
+                        rows="5"
+                        readonly
+                        style="width:100%; resize: none; background-color: #eee8aa"
+                        hx-get="/LatinText"
+                        hx-trigger="keyup from:#BasqueText, load"
+                        hx-swap="innerHTML"
+                        hx-include="[name='text']"
+                        ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+      <div class="card mt-1 mb-1">
+        <div class="card-body">
+          <h4 class="card-title">
+            Nola idazten zen?
+          </h4>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Ez zegoen papelik, papirorik edo pergaminorik
+            (ez zaigu iritsi behintzat). Burdinean edo harrian idazten zen.
+          </h6>
+          <center>
+            <div style="max-width: 400px"
+                 hx-get="/IberianSVG"
+                 hx-trigger="keyup from:#BasqueText, load"
+                 hx-swap="innerHTML"
+                 hx-include="[name='text']">
+            </div>
+          </center>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer border-top text-center">
+      <div>
+        <ul class="list-unstyled small text-muted">
+          <li class="mb-2">
+            Iberiar.eu software askea da
+            <a href="https://github.com/harkaitz/go-iberiar/blob/master/LICENSE">MIT</a>
+            lizentziarekin. Donatu dezakezu
+            <a href="btc://1C1ZzDje7vHhF23mxqfcACE8QD4nqxywiV">bitcoin</a> edo
+            <a href="xmr://88JP1c94kDEbyddN4NGU574vwXHB6r3FqcFX9twmxBkGNSnf64c5wjE89YaRVUk7vBbdnecWSXJmRhFWUcLcXUTFJVddZti">monero</a>
+            proiektuak martxan jarrai dadin. Donatzaileei email bidez aldaketen
+            berri ematen diegu.
+          </li>
+          <li class="mb-2">
+            Iturri kodea <a href="https://github.com/harkaitz/go-iberiar">hemen</a> errebisatu dezakezu.<br/>Programatzailea
+            bazara ez lotsatu eta bidali "pull-request"-ak lasai.
+          </li>
+          <li class="mb-2">
+            Bug erreporteak eta iradokizunak lasai bidali <a href="mailto:harkaitz.aguirre@gmail.com">harkaitz.aguirre@gmail.com</a>.
+          </li>
+        </ul>
+        <p class="mt-1 mb-1 small text-muted">
+          © 2022
+          <a class="text-muted"
+             href="https://github.com/harkaitz"
+             target="_blank">
+            Harkaitz Agirre
+          </a>
+        </p>
+      </div>
+    </footer>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/autofill.js"></script>
+    <script src="/js/htmx.min.js"></script>
+  </body>
+</html>
