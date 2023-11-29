@@ -1,12 +1,8 @@
 #!/bin/sh -e
-##:
-#h: Usage: lsetup-fonts-iberian -i : Install iberian font.
-##:
 #help: Install iberian fonts.
-##:
 . getsrc-vault
 . getsrc-cached
-lsetup_fonts_iberian() {
+install_fonts() {
     local u t f
     u="https://ibers.cat/iberian.ttf"
     t="/usr/share/fonts/TTF/iberian.ttf"
@@ -16,9 +12,6 @@ lsetup_fonts_iberian() {
     sudo mkdir -p -v "$(dirname "${t}")"
     sudo cp -v "${f}" "${t}"
 }
-if test @"$(basename "$0")" = @"lsetup-fonts-iberian";then
-    case "${1}" in
-        ''|-h|--help) sed -n 's/^ *#h: \{0,1\}//p' "$0" ;;
-        -*i*)         lsetup_fonts_iberian "$@"; exit 0 ;;
-    esac
+if test @"$(basename "$0")" = @"install-fonts"; then
+    install_fonts
 fi

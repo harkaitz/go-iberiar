@@ -9,6 +9,7 @@ bin/iberiar-web.*
 bin/iberiar
 bin/iberiar.*
 ## -- GO --
+*.mo
 ## -- BLOCK:go --
 build/*
 releases/*

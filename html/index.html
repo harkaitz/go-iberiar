@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+    <meta language="{{.Language}}"/>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Iberiar.eu</title>
@@ -25,7 +26,12 @@
         -
         <span class="iberian" style="font-size: 24px"></span>
       </h1>
-      Antzinako euskal/iberiar idazkera itzultzailea
+      {{.T "Ancient basque/iberian writting translator"}}
+      <center>
+        <a href="?lang=es">[español]</a>
+        <a href="?lang=eu">[euskara]</a>
+        <a href="?lang=en">[english]</a>
+      </center>
     </div>
     <!-- Navigation bar -->
     
@@ -36,48 +42,45 @@
       <div class="card mt-1 mb-1">
         <div class="card-body">
           <h4 class="card-title">
-            <strong>Iberiar idazketa</strong> edo
-            <strong>iberiar idazkera</strong>
+            {{.H "<strong>The iberian script</strong>"}}
           </h4>
           <h6 class="card-subtitle mb-2 text-muted">
-            <a href="https://eu.wikipedia.org/wiki/Iberiar_idazketa">
-              Wikipedia artikulutik
+            <a href="{{.T "https://en.wikipedia.org/wiki/Iberian_scripts"}}">
+              {{.T "From wikipedia article"}}
             </a>
           </h6>
           <p class="card-text text-left">
-            Iberiar Penintsulan eta Frantzian aurkitu diren testuenak
-            dira. Iberiar herriek idazketa sistema desberdinak erabili
-            zituzten. Idazkera paleohispaniarretako bat da. 
+            {{.T "The Iberian scripts are the Paleohispanic scripts that were used to represent the extinct Iberian language."}}
           </p>
         </div>
       </div>
       
       <div class="card mt-1 mb-1">
         <div class="card-body">
-          <h4 class="card-title">Idatzi iberiarrez</h4>
+          <h4 class="card-title">{{.T "Write in iberian"}}</h4>
           <h6 class="card-subtitle mb-2 text-muted">
-            Iberiar idazkera erdi silabiko erdi alfabetikoa zen. Euskara
-            nahiko ondo idatz daiteke. Beste hizkuntzak ia ezinezkoak
-            dira iberiarrez idaztea.
+            {{.T "The iberian scripts are semi-syllabic rather than purely alphabetic."}}
+            {{.T "The basque language can be written with some success."}}
+            {{.T "The rest of languages are nearly imposible. It lacks characters."}}
           </h6>
           <div class="row mb-1">
             <div class="col">
               <textarea id="BasqueText"
                         class="form-control"
                         name="text"
-                        rows="4"
+                        rows="7"
                         style="width: 100%; resize: none; background-color: #fff8dc"
                         placeholder="Idatzi emen"
                         js-autofill="true"
-                        >Zorionak, eta&#10;urte berri on.</textarea>
+                        >{{.H "Here lies Beles&#10;Son of Beles."}}</textarea>
               <center>
-                (Idatzi dezakezu)
+                ({{.T "You can write"}})
               </center>
             </div>
             <div class="col">
               <textarea id="IberianText"
                         class="form-control iberian"
-                        rows="5"
+                        rows="3"
                         readonly
                         style="width:100%; resize: none; background-color: #eee8aa"
                         hx-get="/IberianText"
@@ -85,11 +88,10 @@
                         hx-swap="innerHTML"
                         hx-include="[name='text']"
                         ></textarea>
-            </div>
-            <div class="col">
+              <br/>
               <textarea id="LatinText"
-                        class="form-control"
-                        rows="5"
+                        class="form-control-sm"
+                        rows="3"
                         readonly
                         style="width:100%; resize: none; background-color: #eee8aa"
                         hx-get="/LatinText"
@@ -107,11 +109,11 @@
       <div class="card mt-1 mb-1">
         <div class="card-body">
           <h4 class="card-title">
-            Nola idazten zen?
+            {{.T "Where was it written?"}}
           </h4>
           <h6 class="card-subtitle mb-2 text-muted">
-            Ez zegoen papelik, papirorik edo pergaminorik
-            (ez zaigu iritsi behintzat). Burdinean edo harrian idazten zen.
+            {{.T "There was no paper."}}
+            {{.T "It was written on iron or stone."}}
           </h6>
           <center>
             <div style="max-width: 400px"
@@ -131,20 +133,30 @@
       <div>
         <ul class="list-unstyled small text-muted">
           <li class="mb-2">
-            Iberiar.eu software askea da
+            Iberiar.eu {{.T "is opensource"}}
             <a href="https://github.com/harkaitz/go-iberiar/blob/master/LICENSE">MIT</a>
-            lizentziarekin. Donatu dezakezu
+            lizentziarekin.
+
+            {{.T "You can donate to"}}
             <a href="btc://1C1ZzDje7vHhF23mxqfcACE8QD4nqxywiV">bitcoin</a> edo
             <a href="xmr://88JP1c94kDEbyddN4NGU574vwXHB6r3FqcFX9twmxBkGNSnf64c5wjE89YaRVUk7vBbdnecWSXJmRhFWUcLcXUTFJVddZti">monero</a>
-            proiektuak martxan jarrai dadin. Donatzaileei email bidez aldaketen
-            berri ematen diegu.
+            {{.T "so that the project continues"}}.
+            
           </li>
           <li class="mb-2">
-            Iturri kodea <a href="https://github.com/harkaitz/go-iberiar">hemen</a> errebisatu dezakezu.<br/>Programatzailea
-            bazara ez lotsatu eta bidali "pull-request"-ak lasai.
+            {{.T "You can revise the source code"}}
+            <a href="https://github.com/harkaitz/go-iberiar">
+              {{.T "here"}}
+            </a>
+            .
+            <br/>
+            {{.T "If you are a programmer don't be shy and send a \"pull-request\"."}}
           </li>
           <li class="mb-2">
-            Bug erreporteak eta iradokizunak lasai bidali <a href="mailto:harkaitz.aguirre@gmail.com">harkaitz.aguirre@gmail.com</a>.
+            {{.T "Bug reports and suggestions here: "}}
+            <a href="mailto:harkaitz.aguirre@gmail.com">
+              harkaitz.aguirre@gmail.com
+            </a>.
           </li>
         </ul>
         <p class="mt-1 mb-1 small text-muted">
@@ -157,6 +169,7 @@
         </p>
       </div>
     </footer>
+    
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/autofill.js"></script>
     <script src="/js/htmx.min.js"></script>

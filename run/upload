@@ -1,0 +1,5 @@
+#!/bin/sh -e
+#help: Build, upload to server and restart service.
+hsrc -z -t aarch64-linux-gnu -p /usr/local iberiar
+hsrc-install -m rpi3b iberiar
+ssh-h-services iberiar restart status

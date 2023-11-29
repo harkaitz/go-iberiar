@@ -1,0 +1,3 @@
+GETTEXT_H_FIND_CMD="find . -iname '*.go' -or -iname '*.html'"
+GETTEXT_H_LANGS='eu es'
+GETTEXT_H_DOMAIN='iberiar'

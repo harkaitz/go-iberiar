@@ -1,0 +1,108 @@
+# Basque translations for PACKAGE package.
+# Copyright (C) 2023 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: html/index.html
+msgid "Ancient basque/iberian writting translator"
+msgstr "Antzinako euskal/iberiar idazkera itzultzailea"
+
+#: html/index.html
+msgid "<strong>The iberian script</strong>"
+msgstr ""
+"<strong>Iberiar idazketa</strong> edo <strong>iberiar idazkera</strong>"
+
+#: html/index.html
+msgid "https://en.wikipedia.org/wiki/Iberian_scripts"
+msgstr "https://eu.wikipedia.org/wiki/Iberiar_idazketa"
+
+#: html/index.html
+msgid "From wikipedia article"
+msgstr "Wikipedia artikulutik"
+
+#: html/index.html
+msgid ""
+"The Iberian scripts are the Paleohispanic scripts that were used to "
+"represent the extinct Iberian language."
+msgstr ""
+"Iberiar Penintsulan eta Frantzian aurkitu diren testuenak dira. Iberiar "
+"herriek idazketa sistema desberdinak erabili zituzten. Idazkera "
+"paleohispaniarretako bat da."
+
+#: html/index.html
+msgid "Write in iberian"
+msgstr "Idatzi iberiarrez"
+
+#: html/index.html
+msgid "The iberian scripts are semi-syllabic rather than purely alphabetic."
+msgstr "Iberiar idazkera erdi silabiko erdi alfabetikoa zen."
+
+#: html/index.html
+msgid "The basque language can be written with some success."
+msgstr "Euskara nahiko ondo idatz daiteke."
+
+#: html/index.html0
+msgid "The rest of languages are nearly imposible. It lacks characters."
+msgstr "Beste hizkuntzak ia ezinezkoak dira iberiarrez idaztea."
+
+#: html/index.html1
+msgid "Here lies Beles&#10;Son of Beles."
+msgstr "Zorionak, eta&#10;urte berri on."
+
+#: html/index.html2
+msgid "You can write"
+msgstr "Idatzi dezakezu"
+
+#: html/index.html3
+msgid "Where was it written?"
+msgstr "Nola idazten zen?"
+
+#: html/index.html4
+msgid "There was no paper."
+msgstr ""
+"Ez zegoen papelik, papirorik edo pergaminorik (ez zaigu iritsi behintzat)."
+
+#: html/index.html5
+msgid "It was written on iron or stone."
+msgstr "Burdinean edo harrian idazten zen."
+
+#: html/index.html6
+msgid "is opensource"
+msgstr "software askea da"
+
+#: html/index.html7
+msgid "You can donate to"
+msgstr "Donatu dezakezu"
+
+#: html/index.html8
+msgid "so that the project continues"
+msgstr "proiektuak martxan jarrai dadin"
+
+#: html/index.html9
+msgid "You can revise the source code"
+msgstr "Iturri kodea errebisatu dezakezu"
+
+#: html/index.html0
+msgid "here"
+msgstr "hemen"
+
+#: html/index.html1
+msgid "If you are a programmer don't be shy and send a \"pull-request\"."
+msgstr ""
+"Programatzailea bazara ez lotsatu eta bidali \"pull-request\"-ak lasai."
+
+#: html/index.html2
+msgid "Bug reports and suggestions here: "
+msgstr "Bug erreporteak eta iradokizunak lasai bidali"

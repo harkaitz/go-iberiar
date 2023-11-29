@@ -1,0 +1,108 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2023 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: html/index.html
+msgid "Ancient basque/iberian writting translator"
+msgstr "Traductor de signario ibero"
+
+#: html/index.html
+msgid "<strong>The iberian script</strong>"
+msgstr "<strong>El signario ibero</strong>"
+
+#: html/index.html
+msgid "https://en.wikipedia.org/wiki/Iberian_scripts"
+msgstr "https://es.wikipedia.org/wiki/Signario_ib%C3%A9rico"
+
+#: html/index.html
+msgid "From wikipedia article"
+msgstr "Artículo de wikipedia"
+
+#: html/index.html
+msgid ""
+"The Iberian scripts are the Paleohispanic scripts that were used to "
+"represent the extinct Iberian language."
+msgstr ""
+"Las escrituras ibéricas son las escrituras paleohispánicas que se utilizaban "
+"pararepresentan la lengua ibérica extinta"
+
+#: html/index.html
+msgid "Write in iberian"
+msgstr "Escribe en ibero"
+
+#: html/index.html
+msgid "The iberian scripts are semi-syllabic rather than purely alphabetic."
+msgstr "Las escrituras ibéricas son semisilábicas y no puramente alfabéticas."
+
+#: html/index.html
+msgid "The basque language can be written with some success."
+msgstr "El idioma vasco se puede escribir con cierto éxito."
+
+#: html/index.html0
+msgid "The rest of languages are nearly imposible. It lacks characters."
+msgstr ""
+"El resto de idiomas son difiles de escribir, al requerir un silabario mas "
+"extenso."
+
+#: html/index.html1
+msgid "Here lies Beles&#10;Son of Beles."
+msgstr "Aqui vive Pablo&#10;Hijo de Antonio."
+
+#: html/index.html2
+msgid "You can write"
+msgstr "Puedes escribir"
+
+#: html/index.html3
+msgid "Where was it written?"
+msgstr "¿Come se escribia?"
+
+#: html/index.html4
+msgid "There was no paper."
+msgstr "No había papél"
+
+#: html/index.html5
+msgid "It was written on iron or stone."
+msgstr "Estaba escrito en hierro o piedra."
+
+#: html/index.html6
+msgid "is opensource"
+msgstr "es software libre"
+
+#: html/index.html7
+msgid "You can donate to"
+msgstr "Puedes hacer una donación a"
+
+#: html/index.html8
+msgid "so that the project continues"
+msgstr "para que el proyecto siga adelante"
+
+#: html/index.html9
+msgid "You can revise the source code"
+msgstr "Puedes revisar el código fuente"
+
+#: html/index.html0
+msgid "here"
+msgstr "aquí"
+
+#: html/index.html1
+msgid "If you are a programmer don't be shy and send a \"pull-request\"."
+msgstr ""
+"Si eres programador, no seas tímido y envía una \"solicitud de extracción\"."
+
+#: html/index.html2
+msgid "Bug reports and suggestions here: "
+msgstr "Informes de errores y sugerencias aquí: "
