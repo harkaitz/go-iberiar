@@ -17,7 +17,7 @@ type Settings struct {
 
 
 func main() {
-	var c  Settings = Settings{ "127.0.0.1:8084", "naxhjgfyebckahs" }
+	var c  Settings = Settings{ "0.0.0.0:8084", "naxhjgfyebckahs" }
 	var r *gin.Engine
 	var m  memstore.Store
 	var err error
