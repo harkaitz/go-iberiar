@@ -1,0 +1,38 @@
+#!/bin/sh -e
+##:
+#h: Usage: i-font-iberian { download | install }
+##:
+i_font_iberian() {
+    local cmd="$1"
+    shift
+    case "${cmd}" in
+        download) ddir_font_iberian      ;;
+        install)  i_font_iberian_install ;;
+        *)        echo "error: Invalid argument: ${cmd}" >&2; return 2;;
+    esac
+}
+i_font_iberian_install() {
+    local ttf="$(ddir_font_iberian)"
+    test -n "${ttf}"
+    $SUDO mkdir -p /usr/share/fonts/TTF
+    $SUDO cp "${ttf}" /usr/share/fonts/TTF
+    $SUDO fc-cache -fv
+}
+# --------------------------------------------------------------------
+ddir_font_iberian() {
+    local ttf="${DDIR:-${TEMP:-/tmp}}/iberian.ttf"
+    if test ! -f "${ttf}"; then
+        wget -O "${ttf}.tmp" "https://ibers.cat/iberian.ttf" >&2
+        mv -v "${ttf}.tmp" "${ttf}" >&2
+    fi
+    echo "${ttf}"
+}
+# --------------------------------------------------------------------
+if test @"${0##*/}" = @"i-font-iberian"; then
+    export MSYS_NO_PATHCONV=1
+    case "${1}" in
+        ''|-h|--help) sed -n 's/^ *#h: \{0,1\}//p' "$0";;
+        *)            i_font_iberian "$@";;
+    esac
+    exit 0
+fi

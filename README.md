@@ -15,7 +15,7 @@ Simply run this commands:
 
     > make
     > ./bin/iberiar
-    > firefox http://127.0.0.1:8080
+    > firefox http://127.0.0.1:8084
 
 ## Todo
 
@@ -24,6 +24,16 @@ Simply run this commands:
 - Complete the mapping tables.
 - Add references, tables etc to the website.
 - A lot.
+
+## Iberian fonts
+
+Copy `html/assets/iberian.ttf` to `/usr/share/fonts/TTF/iberian.ttf`
+and execute `fc-cache -fv` to read the source files properly.
+
+You can run the installation scripts:
+
+    sudo ./pkg/i-font-iberian install
+    sudo ./pkg/i-font-uniedit-iberian install
 
 ## Collaborating
 

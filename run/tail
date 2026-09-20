@@ -1,3 +1,0 @@
-#!/bin/sh -e
-#help: Attach to service log.
-ssh-h-services iberiar tail

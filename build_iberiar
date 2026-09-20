@@ -1,7 +1,0 @@
-#!/bin/sh -e
-. hmain
-build_iberiar() {
-    hgmake all install
-}
-## -------------------------------------------------------------------
-hmain -f "build_iberiar" -e "build_iberiar" "$@"

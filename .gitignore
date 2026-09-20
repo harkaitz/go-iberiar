@@ -10,9 +10,12 @@ bin/iberiar
 bin/iberiar.*
 ## -- GO --
 *.mo
+## -- BLOCK:make-h --
+*~
+## -- BLOCK:make-h --
 ## -- BLOCK:go --
-build/*
-releases/*
+.build/*
+.releases/*
 ## -- BLOCK:go --
 ## -- BLOCK:license --
 ## -- BLOCK:license --

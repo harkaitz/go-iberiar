@@ -1,0 +1,41 @@
+#!/bin/sh -e
+##:
+#h: Usage: i-font-uniedit-iberian { download | install }
+##:
+i_font_uniedit_iberian() {
+    local cmd="$1"
+    shift
+    case "${cmd}" in
+        download) ddir_uniedit_iberian ;;
+        install)  uniedit_iberian_install ;;
+        *)        echo "error: Invalid argument: ${cmd}" >&2; return 2;;
+    esac
+}
+uniedit_iberian_install() {
+    if test ! -f /usr/local/bin/uniedit-iberian; then
+        local prg="$(ddir_uniedit_iberian)"
+        test -n "${prg}"
+        chmod +x "${prg}"
+        $SUDO mkdir -p /usr/local/bin
+        $SUDO cp "${prg}" /usr/local/bin/uniedit-iberian
+    fi
+}
+# --------------------------------------------------------------------
+ddir_uniedit_iberian() {
+    local prg="${DDIR:-${TEMP:-/tmp}}/uniedit-iberian.tcl"
+    if test ! -f "${prg}"; then
+        wget -O "${prg}.tmp" "https://ibers.cat/uniedit-iberian.tcl" >&2
+        mv -v "${prg}.tmp" "${prg}" >&2
+    fi
+    echo "${prg}"
+}
+
+# --------------------------------------------------------------------
+if test @"${0##*/}" = @"i-font-uniedit-iberian"; then
+    export MSYS_NO_PATHCONV=1
+    case "${1}" in
+        ''|-h|--help) sed -n 's/^ *#h: \{0,1\}//p' "$0";;
+        *)            i_font_uniedit_iberian "$@";;
+    esac
+    exit 0
+fi

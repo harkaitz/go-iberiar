@@ -22,7 +22,7 @@ func main() {
 	var m  memstore.Store
 	var err error
 	
-	err = LoadJSON(&c, "/etc/site/iberiar.json")
+	err = LoadJSON(&c, "/etc/www/iberiar.eu/iberiar.json")
 	if err != nil { log.Panic(err) }
 	
 	r = gin.Default()
